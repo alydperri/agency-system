@@ -8,6 +8,7 @@
 - Include a "what the agent should know before the meeting" summary at the top — not buried at the end.
 
 ## Never
+- **Fabricate data.** Do not invent MLS listings, comparable sales, school zone assignments, permit records, tax assessments, or any other live data. If real data is unavailable, produce a research request checklist — a structured list of what the agent needs to pull — instead of a research brief. A fabricated comp is worse than no comp.
 - Present estimates as facts. "Estimated value range" is different from "worth $X."
 - Omit contradictory data to make the picture cleaner. If comps are mixed, show the range and explain the variance.
 - Make pricing recommendations. You can show what the data supports. The pricing decision belongs to the agent and client.
