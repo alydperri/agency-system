@@ -1,4 +1,5 @@
 # The Agency System
+
 ### An AI Operating System for Diana's Team
 
 ---
@@ -7,9 +8,13 @@ Diana, this was built for you.
 
 Not for a generic real estate team. For a four-person boutique operation that turns down volume to do better work, runs on referrals and reputation, and has too much institutional knowledge living in one person's head.
 
-The system has one job: make your standards portable. When Marcus handles a lead, he should handle it the way you would. When Carmen is staring at a new contract at 11pm, she should know exactly what to do without texting you. When a client-facing email goes out under Priya's name, it should sound like Priya — and it should be good.
+The system has one job: make your standards portable.
 
-That's what this is. Two root contracts hold it together:
+When Marcus handles a lead, he should handle it the way you would. When Carmen is staring at a new contract at 11pm, she should know exactly what to do without texting you. When a client-facing email goes out under Priya's name, it should sound like Priya — and it should be good.
+
+That's what this is.
+
+Two root contracts hold it together:
 
 - **`DIANA_STANDARD.md`** — the quality bar every output is held to
 - **`HANDOFF_PROTOCOL.md`** — how work moves between specialists
@@ -20,66 +25,130 @@ Everything else inherits from those two files.
 
 ## What You're Working With
 
-Six specialists, each owning one part of your workflow. Every request starts at the Orchestrator and moves through the system with an explicit handoff at each stage — so context doesn't disappear between steps and nobody has to rebuild it from scratch.
+Six specialists, each owning one part of your workflow.
 
-```
+Every request starts at the Orchestrator and moves through the system with an explicit handoff at each stage, so context doesn't disappear between steps and nobody has to rebuild it from scratch.
+
+```text
 agency-system/
 ├── README.md
-├── DIANA_STANDARD.md           ← Quality bar every specialist applies
-├── HANDOFF_PROTOCOL.md         ← Standard packet for moving work between specialists
-├── voice/                      ← Agent voice profiles (one file per team member)
-├── 00_orchestrator/            ← Every request starts here
-├── 01_lead_qualifier/          ← Turns inquiries into actionable lead profiles
-├── 02_property_research/       ← Research briefs for client conversations
-├── 03_client_communication/    ← Drafts all client-facing messages in the agent's voice
-├── 04_transaction_coordinator/ ← Tracks deals from contract to close
-└── 05_quality_review/          ← Reviews drafts before anything reaches a client
+├── DIANA_STANDARD.md              ← Quality bar every specialist applies
+├── HANDOFF_PROTOCOL.md            ← Standard packet for moving work between specialists
+├── voice/                         ← Agent voice profiles, one file per team member
+├── 00_orchestrator/               ← Every request starts here
+├── 01_lead_qualifier/             ← Turns inquiries into actionable lead profiles
+├── 02_property_research/          ← Research briefs for client conversations
+├── 03_client_communication/       ← Drafts all client-facing messages in the agent's voice
+├── 04_transaction_coordinator/    ← Tracks deals from contract to close
+└── 05_quality_review/             ← Reviews drafts before anything reaches a client
 ```
 
 Each folder contains four files:
+
 - `identity.md` — who this specialist is, what they own, what they don't
 - `rules.md` — how they operate, always and never
 - `examples.md` — two to three examples showing the specialist in action
-- `handoff.md` — what they receive, what they produce, and where work goes next. Each `handoff.md` uses the root `HANDOFF_PROTOCOL.md` packet shape, then defines that specialist's specific inputs, outputs, and routing logic.
+- `handoff.md` — what they receive, what they produce, and where work goes next
+
+Each `handoff.md` uses the root `HANDOFF_PROTOCOL.md` packet shape, then defines that specialist's specific inputs, outputs, and routing logic.
+
+---
+
+## Start Here: First Request in 3 Steps
+
+If you are new to the system, do not try to understand every folder first. Start with one real request.
+
+1. Open `00_orchestrator`.
+
+2. Load the two root contracts plus the Orchestrator files:
+
+   - `DIANA_STANDARD.md`
+   - `HANDOFF_PROTOCOL.md`
+   - `00_orchestrator/identity.md`
+   - `00_orchestrator/rules.md`
+   - `00_orchestrator/handoff.md`
+
+3. Paste the request and let the Orchestrator route it.
+
+Example first request:
+
+> Marcus has a new buyer lead from the Hendersons. They want to move soon, but we do not know budget, neighborhood, financing status, or decision timeline yet.
+
+The Orchestrator will produce a Handoff Packet. Copy that packet into the destination specialist folder it names — usually `01_lead_qualifier` for a request like this.
+
+The manual copy is intentional. It's what makes the system inspectable: you can see exactly what context traveled forward and catch anything that looks wrong before the next specialist runs. There's no hidden state. The packet is the audit trail.
+
+That is the basic operating pattern:
+
+```text
+Request → Orchestrator → Handoff Packet → Specialist → Next Handoff Packet → Next Specialist
+```
+
+You do not need to memorize the architecture. Follow the packet.
 
 ---
 
 ## How a Request Moves Through the System
 
-**Every request starts at the Orchestrator.** No exceptions.
+**Every request starts at the Orchestrator.**
+
+No exceptions.
 
 The Orchestrator reads the incoming request, assesses what's known and what's missing, surfaces any risk flags, and produces a Handoff Packet for the right specialist. If a request is ambiguous, it asks one clarifying question before routing.
 
 **A new lead looks like this:**
 
-```
-Team member → 00_orchestrator
-  → Handoff Packet → 01_lead_qualifier
-    → Lead Profile → 03_client_communication
-      → Draft → 05_quality_review
-        → Approved → agent sends
+```text
+Team member
+→ 00_orchestrator
+→ Handoff Packet
+→ 01_lead_qualifier
+→ Lead Profile
+→ 03_client_communication
+→ Draft
+→ 05_quality_review
+→ Approved
+→ agent sends
 ```
 
 **A deal going under contract looks like this:**
 
-```
-Team member → 00_orchestrator
-  → 04_transaction_coordinator
-    → Transaction checklist with deadlines and owners
-    → On status check: surfaces upcoming deadlines and flags risks before they become problems
-    → When client update needed → 03_client_communication
-      → Draft → 05_quality_review → agent sends
+```text
+Team member
+→ 00_orchestrator
+→ 04_transaction_coordinator
+→ Transaction checklist with deadlines and owners
+→ On status check: surfaces upcoming deadlines and flags risks before they become problems
+→ When client update needed
+→ 03_client_communication
+→ Draft
+→ 05_quality_review
+→ agent sends
 ```
 
-**The Handoff Packet is what keeps this system coherent.** Every specialist receives one and produces one. Context travels forward explicitly at every step — nobody has to ask "wait, what am I doing and why?"
+**The Handoff Packet is what keeps this system coherent.**
+
+Every specialist receives one and produces one.
+
+Context travels forward explicitly at every step, so nobody has to ask "wait, what am I doing and why?"
 
 ---
 
 ## The Two Root Contracts
 
-**`DIANA_STANDARD.md`** defines the quality bar: four criteria — specificity, clarity, brevity, and voice — that every output is held to. Each specialist folder applies those criteria to its own domain. The quality review specialist (05) exists to enforce this before anything reaches a client. If Diana's standards evolve, update `DIANA_STANDARD.md` and it propagates through the whole system.
+**`DIANA_STANDARD.md`** defines the quality bar: four criteria — specificity, clarity, brevity, and voice — that every output is held to.
 
-**`HANDOFF_PROTOCOL.md`** defines how work moves. Every specialist receives and produces a standard Handoff Packet — a structured context carrier with named fields for known facts, unknowns, risk flags, Diana Standard notes, voice context, escalation status, and next output needed. Work doesn't move between specialists without one.
+Each specialist folder applies those criteria to its own domain.
+
+The quality review specialist (05) exists to enforce this before anything reaches a client. It is an intentional sixth folder because Diana's reputation depends most on client-facing communication, and a small team needs a lightweight review layer before drafts go out under an agent's name.
+
+If Diana's standards evolve, update `DIANA_STANDARD.md` and it propagates through the whole system.
+
+**`HANDOFF_PROTOCOL.md`** defines how work moves.
+
+Every specialist receives and produces a standard Handoff Packet: a structured context carrier with named fields for known facts, unknowns, risk flags, Diana Standard notes, voice context, escalation status, and next output needed.
+
+Work doesn't move between specialists without one.
 
 The two contracts are designed to work together: the handoff packet carries the Diana Standard forward at every stage, so quality expectations travel with the work rather than getting re-stated at each step.
 
@@ -89,11 +158,9 @@ The two contracts are designed to work together: the handoff packet carries the 
 
 The folders are the system. You load a specialist's context when you need that specialist.
 
-**Working in Claude Code (VS Code):**
+Load the two root contracts plus the relevant specialist's files using `@` references:
 
-When you start a task, load the two root contracts plus the relevant specialist's files:
-
-```
+```text
 @DIANA_STANDARD.md
 @HANDOFF_PROTOCOL.md
 @00_orchestrator/identity.md
@@ -101,31 +168,43 @@ When you start a task, load the two root contracts plus the relevant specialist'
 @00_orchestrator/handoff.md
 ```
 
-Load both root contracts every time — it's simpler than deciding when they're relevant, and they're small enough that the overhead is negligible. When the specialist produces a Handoff Packet, open a new session, load the root contracts again plus the destination specialist's files, and continue. Use `examples.md` when a task is unusual or you want to show Claude what good output looks like.
+Load both root contracts every time. It's simpler than deciding when they're relevant, and they're small enough that the overhead is negligible.
 
-**Working in claude.ai (browser):**
+When the specialist produces a Handoff Packet, open a new session, load the root contracts again plus the destination specialist's files, and continue.
 
-Same approach without the `@` syntax. Copy the contents of `DIANA_STANDARD.md`, `HANDOFF_PROTOCOL.md`, `identity.md`, `rules.md`, and `handoff.md` into the conversation before your request. For frequent use, create a saved Project per specialist and paste all five files into the project instructions.
+Use `examples.md` when a task is unusual or you want to show Claude what good output looks like.
 
-**The flow in either setup:**
-1. Start with `00_orchestrator` — load its three core files, drop your request
+**The flow:**
+
+1. Start with `00_orchestrator` — load its files, drop your request
 2. Take the Handoff Packet to the destination specialist
 3. Follow the chain until the work is done
 
 **Before your first session, do two things:**
 
-1. **Create voice profiles for each agent.** Copy `voice/TEMPLATE_voice.md`, rename it to the agent's first name (e.g. `voice/marcus.md`), and fill it out. It takes about 15 minutes per person. The `voice/diana.md` file ships as a completed example — read it first to understand what a good profile looks like. The `03_client_communication` specialist will not draft without a profile for the named agent.
-2. **Replace the placeholder agent names** throughout the examples: the system uses Diana, Marcus, Priya, and Carmen — find and replace those with your real team names, and rename the voice profile files to match.
+1. **Create voice profiles for each agent.** Copy `voice/TEMPLATE_voice.md`, rename it to the agent's first name, for example `voice/marcus.md`, and fill it out. It takes about 15 minutes per person.
+
+   The `voice/diana.md` file ships as a completed example. Read it first to understand what a good profile looks like.
+
+   The `03_client_communication` specialist will not draft without a profile for the named agent.
+
+2. **Replace the placeholder agent names** throughout the examples. The system uses Diana, Marcus, Priya, and Carmen. Find and replace those with your real team names, and rename the voice profile files to match.
 
 ---
 
 ## Onboarding a New Team Member
 
-Hand them this README. Then have them do one thing: run a practice request through the Orchestrator.
+Hand them this README.
 
-Pick a scenario they'll actually face in the first week — a new lead, a research request, a contract just executed. Walk through the Handoff Packet that comes out, open the destination folder, and read the examples.
+Then have them do one thing: run a practice request through the Orchestrator.
 
-The system doesn't require training on real estate. It requires understanding the flow. The flow is in this README. The depth is in the folders. A new agent should be functional within a day.
+Pick a scenario they'll actually face in the first week: a new lead, a research request, or a contract just executed. Walk through the Handoff Packet that comes out, open the destination folder, and read the examples.
+
+The system does not require new software training. It requires understanding the flow.
+
+The flow is in this README. The depth is in the folders.
+
+A new agent should be functional within a day.
 
 ---
 
@@ -140,19 +219,33 @@ The system doesn't require training on real estate. It requires understanding th
 
 ## Adapting This System for a Different Team
 
-This system was built for Diana's team, but the underlying architecture is not Diana-specific. The folder structure, handoff protocol, and specialist logic apply to any small, high-trust service team with consistent quality standards and clear workflow stages.
+This system was built for Diana's team, but the underlying architecture is not Diana-specific.
+
+The folder structure, handoff protocol, and specialist logic apply to any small, high-trust service team with consistent quality standards and clear workflow stages.
 
 To stand it up for a different team, change four things:
 
-1. **The two root contracts** — update `DIANA_STANDARD.md` with the new team lead's quality bar. `HANDOFF_PROTOCOL.md` carries over unchanged; the packet shape is domain-agnostic. The specialist folders each have a short domain-specific application of the Diana Standard — review those too, but the root file is the only place the full definition lives.
+1. **The two root contracts** — update `DIANA_STANDARD.md` with the new team lead's quality bar.
 
-2. **Agent names and voice profiles** — find and replace agent names throughout `03_client_communication` and any examples. Replace the voice profile files in `voice/` with profiles for the new team's agents using `TEMPLATE_voice.md`.
+   `HANDOFF_PROTOCOL.md` will usually carry over with minimal changes; the packet shape is intentionally domain-light, though fields like `voice_context_needed` and `quality_review_required` may need renaming for very different service contexts.
 
-3. **The transaction checklist** — `04_transaction_coordinator/rules.md` contains a checklist built for Texas residential real estate. A different jurisdiction, deal type, or industry will have different milestones and documents. Rewrite the checklist; the tracking and flagging logic carries over.
+   The specialist folders each have a short domain-specific application of the Diana Standard. Review those too, but the root file is the only place the full definition lives.
 
-4. **The examples** — scenarios in each `examples.md` are drawn from real estate situations. Replace them with two to three representative scenarios from the new domain.
+2. **Agent names and voice profiles** — find and replace agent names throughout `03_client_communication` and any examples.
 
-The Orchestrator logic, Handoff Packet structure, and Quality Review criteria transfer without changes. Those are the architecture. Everything else is content.
+   Replace the voice profile files in `voice/` with profiles for the new team's agents using `TEMPLATE_voice.md`.
+
+3. **The transaction checklist** — `04_transaction_coordinator/rules.md` contains a checklist built for Texas residential real estate.
+
+   A different jurisdiction, deal type, or industry will have different milestones and documents. Rewrite the checklist. The tracking and flagging logic carries over.
+
+4. **The examples** — scenarios in each `examples.md` are drawn from real estate situations.
+
+   Replace them with two to three representative scenarios from the new domain.
+
+The Orchestrator logic, Handoff Packet structure, and Quality Review pattern transfer with minimal changes.
+
+Those are the architecture. Everything else is content.
 
 ---
 
@@ -179,5 +272,5 @@ The Orchestrator logic, Handoff Packet structure, and Quality Review criteria tr
 
 | File | One-line description |
 |---|---|
-| `DIANA_STANDARD.md` | The canonical definition of Diana's quality bar. Every specialist references it. Update here only — not in individual folders. |
+| `DIANA_STANDARD.md` | The canonical definition of Diana's quality bar. Every specialist references it. Update here only, not in individual folders. |
 | `HANDOFF_PROTOCOL.md` | The standard Handoff Packet shape every specialist uses. Defines all fields, loop patterns, and escalation logic. Update here if the packet shape changes. |
