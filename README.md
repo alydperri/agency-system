@@ -88,9 +88,10 @@ The manual copy is intentional. It keeps the system inspectable: you can see exa
 
 ```text
 Request → Orchestrator → Handoff Packet → Specialist → Next Handoff Packet → Next Specialist
+```
 
 You do not need to memorize the architecture. Follow the packet.
-```
+
 
 ---
 
