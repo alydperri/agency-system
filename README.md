@@ -47,6 +47,8 @@ agency-system/
 └── 05_quality_review/             ← Reviews drafts before anything reaches a client
 ```
 
+The sixth — 05_quality_review — is intentional: defining Diana's standard and enforcing it are two different jobs.
+
 Each folder contains four files:
 
 - `identity.md` — who this specialist is, what they own, what they don't
@@ -153,6 +155,7 @@ Work doesn't move between specialists without one.
 The two contracts are designed to work together: the handoff packet carries the Diana Standard forward at every stage, so quality expectations travel with the work rather than getting re-stated at each step.
 
 The packet shape is intentionally domain-light — this is what makes the system portable if the team ever changes shape.
+
 
 ---
 
