@@ -78,6 +78,10 @@ Or go ahead and just run one real request through the Orchestrator:
 
 3. Paste the request and let the Orchestrator route it.
 
+Example first request:
+
+> Marcus has a new buyer lead from the Hendersons. They want to move soon, but we do not know budget, neighborhood, financing status, or decision timeline yet.
+
 The Orchestrator will produce a Handoff Packet. Copy that packet into the destination specialist folder it names.
 
 The manual copy is intentional. It keeps the system inspectable: you can see exactly what context traveled forward and catch anything that looks wrong before the next specialist runs. There is no hidden state. The packet is the audit trail.
