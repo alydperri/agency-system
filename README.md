@@ -56,7 +56,7 @@ Each `handoff.md` uses the root `HANDOFF_PROTOCOL.md` packet shape, then defines
 
 ## Start Here: First Request in 3 Steps
 
-If you are new to the system, do not try to understand every folder first. Start with one real request.
+If you are new to the system, start with the team page (`index.html`) before reading further — it gives you the orientation you need to make sense of what's here. Then come back and run one real request.
 
 1. Open `00_orchestrator`.
 
@@ -194,7 +194,7 @@ Use `examples.md` when a task is unusual or you want to show Claude what good ou
 
 ## Onboarding a New Team Member
 
-Hand them this README.
+Send them the team page first — `index.html` in the repo root, or the GitHub Pages URL if it's enabled. It orients them to the system before they open the files and is a shorter read than this README.
 
 Then have them do one thing: run a practice request through the Orchestrator.
 
@@ -202,7 +202,7 @@ Pick a scenario they'll actually face in the first week: a new lead, a research 
 
 The system does not require new software training. It requires understanding the flow.
 
-The flow is in this README. The depth is in the folders.
+The flow is in the team page. The depth is in the folders. This README is the reference.
 
 A new agent should be functional within a day.
 

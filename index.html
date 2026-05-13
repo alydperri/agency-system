@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Agency System — Welcome to the Team</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Plus+Jakarta+Sans:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg:           #F1F6FB;
+    --bg-mid:       #E6EFF8;
+    --bg-alt:       #FAFCFE;
+    --navy:         #162840;
+    --navy-mid:     #1E3A58;
+    --text:         #1A2B3C;
+    --text-mid:     #3D5472;
+    --text-soft:    #6B85A0;
+    --peach:        #C9704F;
+    --peach-light:  #E09478;
+    --peach-pale:   #F5E0D6;
+    --blue:         #4A7BA8;
+    --blue-light:   #7BA3C4;
+    --blue-pale:    #D6E8F5;
+    --rule:         #BDD0E4;
+    --rule-light:   #D6E5F2;
+    --white:        #FAFCFE;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans:  'Plus Jakarta Sans', system-ui, sans-serif;
+    --mono:  'JetBrains Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  .top-accent {
+    height: 3px;
+    background: linear-gradient(90deg, var(--peach) 0%, var(--peach-light) 40%, var(--blue-light) 100%);
+  }
+
+  /* HEADER */
+  header {
+    padding: 20px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--rule-light);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .header-mark { display: flex; align-items: center; gap: 12px; }
+  .mark-pip { width: 8px; height: 8px; border-radius: 50%; background: var(--peach); flex-shrink: 0; }
+  .mark-text { font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; color: var(--text-soft); line-height: 1.3; }
+  .mark-text strong { display: block; color: var(--text); font-weight: 400; font-size: 12.5px; }
+
+  .header-nav { display: flex; gap: 28px; list-style: none; }
+  .header-nav a { font-size: 13px; font-weight: 400; color: var(--text-soft); text-decoration: none; transition: color 0.2s; }
+  .header-nav a:hover { color: var(--peach); }
+
+  .header-files {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    background: var(--navy);
+    padding: 9px 18px;
+    text-decoration: none;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .header-files:hover { background: var(--navy-mid); }
+
+  /* HERO */
+  .hero {
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    min-height: 82vh;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    padding: 80px 64px 80px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--peach);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: up 0.7s 0.1s ease forwards;
+  }
+  .hero-tag-line { display: block; width: 28px; height: 1px; background: var(--peach); }
+
+  .hero-h1 {
+    font-family: var(--serif);
+    font-size: clamp(42px, 5.5vw, 68px);
+    font-weight: 400;
+    line-height: 1.07;
+    letter-spacing: -0.015em;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: up 0.7s 0.2s ease forwards;
+  }
+  .hero-h1 em { font-style: italic; color: var(--peach); }
+
+  .hero-body {
+    font-size: 16.5px;
+    color: var(--text-mid);
+    line-height: 1.78;
+    max-width: 500px;
+    margin-bottom: 44px;
+    font-weight: 300;
+    opacity: 0;
+    animation: up 0.7s 0.3s ease forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    opacity: 0;
+    animation: up 0.7s 0.4s ease forwards;
+  }
+
+  .btn-navy {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--navy);
+    padding: 13px 26px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-navy:hover { background: var(--navy-mid); transform: translateY(-1px); }
+
+  .btn-soft {
+    font-size: 14px;
+    color: var(--text-soft);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-soft:hover { color: var(--peach); border-color: var(--peach); }
+
+  .hero-aside {
+    background: var(--bg);
+    border-left: 1px solid var(--rule-light);
+    padding: 60px 36px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    animation: fadein 0.9s 0.5s ease forwards;
+  }
+
+  .aside-hed { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 6px; }
+  .aside-sub { font-size: 13px; color: var(--text-soft); font-weight: 300; margin-bottom: 24px; line-height: 1.55; }
+
+  .flow-list { list-style: none; }
+  .flow-item {
+    display: flex;
+    gap: 14px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--rule-light);
+    transition: all 0.3s;
+    border-radius: 2px;
+  }
+  .flow-item:first-child { border-top: 1px solid var(--rule-light); }
+  .flow-item.lit { background: var(--peach-pale); margin: 0 -12px; padding: 13px 12px; border-color: transparent; }
+
+  .flow-num { font-family: var(--mono); font-size: 11px; color: var(--peach); width: 22px; flex-shrink: 0; padding-top: 2px; }
+  .flow-name { font-size: 13.5px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+  .flow-when { font-size: 12px; color: var(--text-soft); font-weight: 300; line-height: 1.4; }
+
+  /* SECTIONS */
+  .section { padding: 80px 60px; border-bottom: 1px solid var(--rule); }
+  .section-white  { background: var(--bg-alt); }
+  .section-blue   { background: var(--bg); }
+  .section-navy   { background: var(--navy); }
+  .section-mid    { background: var(--bg-mid); }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--peach);
+    margin-bottom: 16px;
+  }
+  .eyebrow::before { content: ''; display: block; width: 20px; height: 1px; background: var(--peach); }
+  .section-navy .eyebrow { color: var(--peach-light); }
+  .section-navy .eyebrow::before { background: var(--peach-light); }
+
+  .section-h2 { font-family: var(--serif); font-size: clamp(28px, 3.5vw, 46px); font-weight: 400; line-height: 1.12; margin-bottom: 16px; }
+  .section-navy .section-h2 { color: var(--bg); }
+
+  .section-lead { font-size: 16px; color: var(--text-mid); max-width: 580px; line-height: 1.78; font-weight: 300; margin-bottom: 52px; }
+  .section-navy .section-lead { color: rgba(241,246,251,0.58); }
+
+  /* PRINCIPLES */
+  .principle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; max-width: 880px; }
+
+  .principle { padding: 30px 28px; border: 1px solid var(--rule-light); background: var(--bg-alt); }
+
+  .p-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--peach); margin-bottom: 18px; }
+  .p-title { font-family: var(--serif); font-size: 19px; font-weight: 500; margin-bottom: 10px; line-height: 1.2; }
+  .p-body { font-size: 14px; color: var(--text-mid); line-height: 1.7; font-weight: 300; }
+
+  /* SPECIALISTS */
+  .specialist-list { max-width: 780px; display: flex; flex-direction: column; }
+
+  .specialist { background: var(--bg-alt); border: 1px solid var(--rule-light); border-bottom: none; overflow: hidden; }
+  .specialist:last-child { border-bottom: 1px solid var(--rule-light); }
+
+  .specialist-header {
+    padding: 20px 26px;
+    display: grid;
+    grid-template-columns: 24px 1fr auto;
+    gap: 16px;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    user-select: none;
+  }
+  .specialist-header:hover { background: var(--blue-pale); }
+  .specialist.open .specialist-header { background: var(--blue-pale); }
+
+  .spec-num { font-family: var(--mono); font-size: 11px; color: var(--peach); }
+  .spec-situation { font-size: 12px; color: var(--text-soft); font-weight: 300; margin-bottom: 2px; }
+  .spec-name { font-family: var(--serif); font-size: 17px; font-weight: 500; color: var(--text); }
+  .spec-chevron { font-size: 13px; color: var(--text-soft); transition: transform 0.25s; }
+  .specialist.open .spec-chevron { transform: rotate(180deg); }
+
+  .specialist-body { display: none; padding: 6px 26px 26px 66px; border-top: 1px solid var(--rule-light); }
+  .specialist.open .specialist-body { display: block; }
+
+  .sd-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-top: 18px; margin-bottom: 6px; }
+  .sd-text { font-size: 14px; color: var(--text-mid); line-height: 1.7; font-weight: 300; }
+
+  /* SETUP */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); }
+
+  .step { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-right: none; padding: 36px 32px; }
+  .step:last-child { border-right: 1px solid rgba(255,255,255,0.08); }
+
+  .step-num { font-family: var(--serif); font-size: 52px; font-weight: 300; font-style: italic; color: rgba(255,255,255,0.08); line-height: 1; margin-bottom: 20px; }
+  .step-title { font-family: var(--serif); font-size: 20px; font-weight: 500; color: var(--bg); margin-bottom: 12px; line-height: 1.25; }
+  .step-body { font-size: 14px; color: rgba(241,246,251,0.6); line-height: 1.72; font-weight: 300; margin-bottom: 18px; }
+
+  .step-note {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    line-height: 1.72;
+    color: rgba(241,246,251,0.42);
+    background: rgba(0,0,0,0.2);
+    border-left: 2px solid var(--peach-light);
+    padding: 12px 14px;
+  }
+  .step-note strong { display: block; color: var(--peach-light); font-weight: 400; margin-bottom: 3px; }
+
+  /* FIRST SESSION */
+  .session-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+
+  .sb { border: 1px solid rgba(255,255,255,0.09); background: rgba(255,255,255,0.04); padding: 22px; margin-bottom: 14px; }
+  .sb-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--peach-light); margin-bottom: 10px; }
+  .sb-text { font-size: 14px; color: rgba(241,246,251,0.68); line-height: 1.72; font-weight: 300; }
+
+  .session-code { font-family: var(--mono); font-size: 12px; color: rgba(241,246,251,0.38); background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.06); padding: 18px 20px; line-height: 1.9; }
+
+  .example-box { border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.15); padding: 28px; }
+  .example-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--peach-light); margin-bottom: 18px; }
+
+  .request-quote { font-family: var(--serif); font-size: 14.5px; font-style: italic; color: rgba(241,246,251,0.72); line-height: 1.65; border-left: 2px solid var(--peach-light); padding-left: 16px; margin-bottom: 22px; }
+
+  .response-steps { display: flex; flex-direction: column; gap: 10px; }
+  .rs { display: flex; gap: 12px; align-items: flex-start; }
+  .rs-num { font-family: var(--mono); font-size: 10px; color: var(--peach-light); width: 18px; flex-shrink: 0; padding-top: 3px; }
+  .rs-text { font-size: 13px; color: rgba(241,246,251,0.58); line-height: 1.6; font-weight: 300; }
+
+  /* SYNC BAND */
+  .sync-band { background: var(--peach-pale); border-top: 1px solid #EAD0C4; border-bottom: 1px solid #EAD0C4; padding: 28px 60px; display: flex; gap: 18px; align-items: flex-start; }
+  .sync-pip { width: 8px; height: 8px; border-radius: 50%; background: var(--peach); flex-shrink: 0; margin-top: 7px; }
+  .sync-title { font-family: var(--serif); font-size: 16px; font-weight: 500; margin-bottom: 4px; }
+  .sync-body { font-size: 14px; color: var(--text-mid); line-height: 1.65; font-weight: 300; }
+
+  /* DIANA */
+  .diana-wrap { background: var(--bg-mid); border-top: 2px solid var(--rule); }
+  .diana-header-band { padding: 32px 60px 0; }
+  .diana-label { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); background: var(--navy); padding: 6px 14px; }
+  .diana-section { padding: 48px 60px 80px; }
+
+  .diana-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
+  .diana-card { background: var(--bg-alt); border: 1px solid var(--rule-light); padding: 26px 24px; }
+  .dc-title { font-family: var(--serif); font-size: 17px; font-weight: 500; margin-bottom: 10px; color: var(--text); }
+  .dc-body { font-size: 13.5px; color: var(--text-mid); line-height: 1.72; font-weight: 300; margin-bottom: 14px; }
+  .dc-note { font-family: var(--mono); font-size: 11px; color: var(--text-soft); line-height: 1.6; border-left: 2px solid var(--peach-light); padding-left: 12px; }
+
+  code { font-family: var(--mono); font-size: 11.5px; background: var(--blue-pale); padding: 1px 6px; color: var(--navy-mid); }
+
+  /* FOOTER */
+  footer { background: var(--navy); padding: 28px 60px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-mark { font-family: var(--mono); font-size: 11px; color: rgba(241,246,251,0.32); letter-spacing: 0.06em; }
+  .footer-link { font-family: var(--mono); font-size: 11px; color: rgba(241,246,251,0.32); text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s; }
+  .footer-link:hover { color: var(--peach-light); }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @keyframes up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+
+  /* DEMO */
+  .demo-scenarios { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+
+  .scenario-btn {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--text-soft);
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    padding: 9px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .scenario-btn:hover { border-color: var(--peach-light); color: var(--peach); background: var(--peach-pale); }
+  .scenario-btn.active { border-color: var(--peach); color: var(--peach); background: var(--peach-pale); }
+
+  .demo-output-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    min-height: 340px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .demo-output-wrap.visible { opacity: 1; }
+
+  .demo-input-pane {
+    background: var(--bg);
+    border: 1px solid var(--rule-light);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .demo-pane-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    margin-bottom: 16px;
+  }
+
+  .demo-request-text {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-style: italic;
+    color: var(--text-mid);
+    line-height: 1.72;
+    flex: 1;
+    border-left: 2px solid var(--rule);
+    padding-left: 16px;
+  }
+
+  .demo-custom-wrap { flex: 1; display: flex; flex-direction: column; }
+
+  .demo-custom-input {
+    width: 100%;
+    flex: 1;
+    min-height: 100px;
+    background: var(--bg-alt);
+    border: 1px solid var(--rule);
+    color: var(--text);
+    font-family: var(--serif);
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.7;
+    padding: 14px;
+    resize: none;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .demo-custom-input:focus { border-color: var(--peach-light); }
+  .demo-custom-input::placeholder { color: var(--text-soft); }
+
+  .demo-run-row { display: flex; gap: 8px; margin-top: 14px; align-items: center; }
+
+  .demo-run-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--navy);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .demo-run-btn:hover:not(:disabled) { background: var(--navy-mid); }
+  .demo-run-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .api-key-input {
+    flex: 1;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-mid);
+    background: var(--bg-alt);
+    border: 1px solid var(--rule);
+    padding: 10px 12px;
+    outline: none;
+    transition: border-color 0.2s;
+    min-width: 0;
+  }
+  .api-key-input:focus { border-color: var(--blue-light); }
+  .api-key-input::placeholder { color: var(--text-soft); font-size: 10.5px; }
+
+  .demo-output-pane {
+    background: var(--bg-alt);
+    border: 1px solid var(--rule-light);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .demo-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--text-soft);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .out-section { display: flex; flex-direction: column; gap: 6px; }
+  .out-section.hidden { display: none; }
+
+  .out-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue); }
+
+  .out-route {
+    display: inline-flex;
+    align-items: center;
+    background: var(--peach-pale);
+    border: 1px solid #E8C4B4;
+    padding: 7px 14px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--peach);
+    align-self: flex-start;
+  }
+
+  .out-text { font-size: 13.5px; color: var(--text-mid); line-height: 1.7; font-weight: 300; }
+
+  .out-packet {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--text-mid);
+    background: var(--bg);
+    border: 1px solid var(--rule-light);
+    padding: 16px;
+    line-height: 1.8;
+    white-space: pre-wrap;
+  }
+
+  .demo-loading { display: none; font-family: var(--mono); font-size: 11px; color: var(--text-soft); letter-spacing: 0.06em; }
+  .demo-loading.active { display: block; }
+  .loading-dots::after { content: '...'; animation: dots 1.2s steps(3, end) infinite; }
+  @keyframes dots { 0% { content: '.'; } 40% { content: '..'; } 80%, 100% { content: '...'; } }
+
+  /* COPY PROMPT */
+  .copy-prompt-block {
+    margin-top: 20px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 18px;
+  }
+  .copy-prompt-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--peach-light); margin-bottom: 12px; }
+  .copy-prompt-text { font-family: var(--serif); font-size: 13px; font-style: italic; color: rgba(241,246,251,0.65); line-height: 1.7; margin-bottom: 14px; border-left: 2px solid rgba(224,148,120,0.4); padding-left: 14px; }
+  .copy-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--peach-light);
+    background: transparent;
+    border: 1px solid rgba(224,148,120,0.4);
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { background: rgba(201,112,79,0.15); border-color: var(--peach-light); }
+  .copy-btn.copied { color: rgba(241,246,251,0.4); border-color: rgba(241,246,251,0.15); cursor: default; }
+
+  /* DEMO TRIGGER */
+  .demo-trigger {
+    margin-top: 40px;
+    font-size: 14px;
+    color: var(--text-soft);
+    font-weight: 300;
+  }
+  .demo-trigger-btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--peach);
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--peach-light);
+    padding: 0 0 1px;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .demo-trigger-btn:hover { color: var(--peach-light); border-color: transparent; }
+
+  /* MODAL */
+  .modal-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(22,40,64,0.55);
+    backdrop-filter: blur(4px);
+    z-index: 200;
+  }
+  .modal-backdrop.open { display: block; }
+
+  .modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -48%);
+    width: min(960px, 92vw);
+    max-height: 88vh;
+    overflow-y: auto;
+    background: var(--bg-alt);
+    border: 1px solid var(--rule);
+    box-shadow: 0 24px 80px rgba(22,40,64,0.2);
+    z-index: 201;
+    padding: 36px 40px 40px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+  .modal.open { display: block; }
+
+  .modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .modal-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--peach);
+    margin-bottom: 6px;
+  }
+
+  .modal-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .modal-close {
+    font-size: 16px;
+    color: var(--text-soft);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 8px;
+    flex-shrink: 0;
+    margin-left: 20px;
+    margin-top: 2px;
+    transition: color 0.2s;
+    font-family: var(--sans);
+  }
+  .modal-close:hover { color: var(--text); }
+
+  .modal-note {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule-light);
+    font-size: 12.5px;
+    color: var(--text-soft);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .modal .demo-output-wrap {
+    opacity: 1;
+    min-height: 300px;
+  }
+
+  @media (max-width: 680px) {
+    .modal { padding: 24px; }
+    .modal .demo-output-wrap { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 860px) {
+    header { padding: 18px 24px; }
+    .header-nav { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 56px 24px 40px; }
+    .hero-aside { border-left: none; border-top: 1px solid var(--rule-light); padding: 32px 24px; }
+    .section { padding: 60px 24px; }
+    .principle-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .step { border-right: 1px solid rgba(255,255,255,0.08) !important; border-bottom: none; }
+    .step:last-child { border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .session-layout { grid-template-columns: 1fr; }
+    .diana-grid { grid-template-columns: 1fr; }
+    .diana-header-band { padding: 28px 24px 0; }
+    .diana-section { padding: 32px 24px 60px; }
+    .sync-band { padding: 24px; }
+    footer { padding: 24px; flex-direction: column; gap: 10px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-accent"></div>
+
+<header>
+  <div class="header-mark">
+    <div class="mark-pip"></div>
+    <div class="mark-text">
+      <strong>The Agency System</strong>
+      Diana's Team · v1.0
+    </div>
+  </div>
+  <ul class="header-nav">
+    <li><a href="#how-it-works">How it works</a></li>
+    <li><a href="#the-specialists">The specialists</a></li>
+    <li><a href="#setup">Setup</a></li>
+    <li><a href="#diana">For Diana</a></li>
+  </ul>
+  <a href="https://github.com/alydperri/agency-system" target="_blank" class="header-files">Get the files ↗</a>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <p class="hero-tag"><span class="hero-tag-line"></span>Welcome to the team</p>
+    <h1 class="hero-h1">Handle any situation<br>the way <em>Diana would.</em></h1>
+    <p class="hero-body">Diana built this system so the team's work stays consistent — whether she's in the session or not. Every lead, every client message, every deal in motion gets handled against the same standard, without anyone having to ask her how. This page gets you oriented before you open the files.</p>
+    <div class="hero-actions">
+      <a href="#setup" class="btn-navy">Get set up</a>
+      <a href="#how-it-works" class="btn-soft">See how it works first</a>
+    </div>
+  </div>
+
+  <aside class="hero-aside">
+    <p class="aside-hed">What the system covers</p>
+    <p class="aside-sub">Six specialists, each owning one part of the workflow. You always start with the Orchestrator — it figures out where your request goes from there.</p>
+    <ul class="flow-list">
+      <li class="flow-item" id="fi-0"><span class="flow-num">00</span><div><p class="flow-name">Orchestrator</p><p class="flow-when">Your starting point, every time</p></div></li>
+      <li class="flow-item" id="fi-1"><span class="flow-num">01</span><div><p class="flow-name">Lead Qualifier</p><p class="flow-when">New prospect came in</p></div></li>
+      <li class="flow-item" id="fi-2"><span class="flow-num">02</span><div><p class="flow-name">Property Research</p><p class="flow-when">Preparing for a showing or listing conversation</p></div></li>
+      <li class="flow-item" id="fi-3"><span class="flow-num">03</span><div><p class="flow-name">Client Communication</p><p class="flow-when">Drafting anything that goes to a client</p></div></li>
+      <li class="flow-item" id="fi-4"><span class="flow-num">04</span><div><p class="flow-name">Transaction Coordinator</p><p class="flow-when">Deal is under contract</p></div></li>
+      <li class="flow-item" id="fi-5"><span class="flow-num">05</span><div><p class="flow-name">Quality Review</p><p class="flow-when">Before any draft goes to a client</p></div></li>
+    </ul>
+  </aside>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="section section-white" id="how-it-works">
+  <p class="eyebrow reveal">What this is</p>
+  <h2 class="section-h2 reveal">Diana's standards, without Diana in the room.</h2>
+  <p class="section-lead reveal">A lot of what makes this team good lives in Diana's head — how she reads a prospect, how she writes an update, when something needs to come to her directly. This system makes that portable. You don't have to guess what she'd do.</p>
+
+  <div class="principle-grid reveal">
+    <div class="principle">
+      <div class="p-dot"></div>
+      <h3 class="p-title">One starting point, every time</h3>
+      <p class="p-body">Every request — a new lead, a showing prep, a deal question — goes to the Orchestrator first. It reads the situation, figures out what's clear and what's missing, and hands you off to the right specialist automatically. You describe what happened; it figures out what to do with it.</p>
+    </div>
+    <div class="principle">
+      <div class="p-dot"></div>
+      <h3 class="p-title">Context travels with the work</h3>
+      <p class="p-body">When work moves from one specialist to the next, it carries a packet — everything established, everything still unknown, what needs to happen next. Nothing gets rebuilt from scratch. Nothing falls through the gap between steps.</p>
+    </div>
+    <div class="principle">
+      <div class="p-dot"></div>
+      <h3 class="p-title">Nothing reaches a client unreviewed</h3>
+      <p class="p-body">Every draft runs through Quality Review before it goes out. Diana's standards are written down in the system, so review isn't a vibe check — it's a real gate with four specific criteria your draft has to clear.</p>
+    </div>
+    <div class="principle">
+      <div class="p-dot"></div>
+      <h3 class="p-title">Your voice stays yours</h3>
+      <p class="p-body">Client messages go out under your name, so they have to sound like you. There's a voice profile for each agent. The communication specialist won't draft without one — that's what keeps your messages from sounding like they could have come from anyone.</p>
+    </div>
+  </div>
+  <p class="demo-trigger reveal">Want to see a request move through the system before you get started? <button class="demo-trigger-btn" onclick="openModal()">Guided demo →</button></p>
+</section>
+
+<!-- SPECIALISTS -->
+<section class="section section-blue" id="the-specialists">
+  <p class="eyebrow reveal">The specialists</p>
+  <h2 class="section-h2 reveal">Know what to expect when you land there.</h2>
+  <p class="section-lead reveal">The Orchestrator routes you — you don't pick the specialist yourself. These are here so you understand what each one produces and what it needs from you, so nothing surprises you mid-session. Expand any card to see the details.</p>
+
+  <div class="specialist-list reveal">
+
+    <div class="specialist" onclick="toggleSpec(this)">
+      <div class="specialist-header">
+        <span class="spec-num">00</span>
+        <div><p class="spec-situation">Where every session starts</p><p class="spec-name">Orchestrator</p></div>
+        <span class="spec-chevron">↓</span>
+      </div>
+      <div class="specialist-body">
+        <p class="sd-label">What it does</p>
+        <p class="sd-text">Reads whatever you drop in, works out what's clear and what's missing, flags anything that looks risky, and routes you to the right specialist with a full context packet. If your request is ambiguous it asks one clarifying question before routing — not five, one.</p>
+        <p class="sd-label">What you give it</p>
+        <p class="sd-text">Whatever just landed in your lap. A message from a prospect. A deal update. A question. Describe it in plain terms — you don't need to format or structure it. That's the Orchestrator's job.</p>
+        <p class="sd-label">What comes out</p>
+        <p class="sd-text">A Handoff Packet — a structured summary of what's established, what's unknown, and what happens next. Copy it into the next specialist's session and continue from there.</p>
+      </div>
+    </div>
+
+    <div class="specialist" onclick="toggleSpec(this)">
+      <div class="specialist-header">
+        <span class="spec-num">01</span>
+        <div><p class="spec-situation">Routed here when a new prospect comes in</p><p class="spec-name">Lead Qualifier</p></div>
+        <span class="spec-chevron">↓</span>
+      </div>
+      <div class="specialist-body">
+        <p class="sd-label">What it does</p>
+        <p class="sd-text">Turns whatever you know about a new prospect into a structured lead profile. Six fields, each with a confidence level: budget, timeline, location, financing, whether they're selling something, and what's driving the search right now.</p>
+        <p class="sd-label">Why the confidence levels matter</p>
+        <p class="sd-text">There's a difference between what a prospect told you and what you inferred. The profile makes that explicit so you know what's confirmed and what still needs answering before you invest real time.</p>
+        <p class="sd-label">What comes out</p>
+        <p class="sd-text">A complete lead profile and a recommended next step — usually a first contact draft, which routes to the communication specialist.</p>
+      </div>
+    </div>
+
+    <div class="specialist" onclick="toggleSpec(this)">
+      <div class="specialist-header">
+        <span class="spec-num">02</span>
+        <div><p class="spec-situation">Routed here for showing or listing prep</p><p class="spec-name">Property Research</p></div>
+        <span class="spec-chevron">↓</span>
+      </div>
+      <div class="specialist-body">
+        <p class="sd-label">What it does</p>
+        <p class="sd-text">Builds a research brief for a specific property, neighborhood, or market question — comparable sales, pricing analysis, anything the client is likely to ask that you should know before you walk in.</p>
+        <p class="sd-label">What it won't do</p>
+        <p class="sd-text">Produce a generic market summary that could apply to any property. Every brief is specific to the conversation it's preparing you for. One sharp insight over five generic ones.</p>
+        <p class="sd-label">What comes out</p>
+        <p class="sd-text">A brief organized for a conversation, with a clear bottom line you can use in the room — not a spreadsheet to review before you go.</p>
+      </div>
+    </div>
+
+    <div class="specialist" onclick="toggleSpec(this)">
+      <div class="specialist-header">
+        <span class="spec-num">03</span>
+        <div><p class="spec-situation">Routed here for any client-facing draft</p><p class="spec-name">Client Communication</p></div>
+        <span class="spec-chevron">↓</span>
+      </div>
+      <div class="specialist-body">
+        <p class="sd-label">What it does</p>
+        <p class="sd-text">Drafts emails and messages in your voice — first contact, offer updates, inspection news, financing delays, anything that goes to a client. The output should sound like you wrote it on your best day, not like it came from a system.</p>
+        <p class="sd-label">The one hard requirement</p>
+        <p class="sd-text">It will not draft without your voice profile loaded. Set that up during onboarding and you won't run into it. Skip it and this specialist won't produce anything.</p>
+        <p class="sd-label">What comes out</p>
+        <p class="sd-text">A draft ready for Quality Review. It never routes a message directly to a client — review happens first, every time.</p>
+      </div>
+    </div>
+
+    <div class="specialist" onclick="toggleSpec(this)">
+      <div class="specialist-header">
+        <span class="spec-num">04</span>
+        <div><p class="spec-situation">Routed here once a deal goes under contract</p><p class="spec-name">Transaction Coordinator</p></div>
+        <span class="spec-chevron">↓</span>
+      </div>
+      <div class="specialist-body">
+        <p class="sd-label">What it does</p>
+        <p class="sd-text">Tracks every deadline, document, and open item from contract to close. Option period, inspection, financing contingency, appraisal, title, final walkthrough — each with a days-remaining count and a named owner.</p>
+        <p class="sd-label">How it handles risk</p>
+        <p class="sd-text">It surfaces problems before they become problems — not after a deadline passes. Anything that could blow the deal or needs Diana's judgment gets flagged explicitly for escalation.</p>
+        <p class="sd-label">Worth knowing</p>
+        <p class="sd-text">The checklist is built for Texas residential real estate. If a deal has different requirements, Diana will let you know and update the files.</p>
+      </div>
+    </div>
+
+    <div class="specialist" onclick="toggleSpec(this)">
+      <div class="specialist-header">
+        <span class="spec-num">05</span>
+        <div><p class="spec-situation">Final check before anything reaches a client</p><p class="spec-name">Quality Review</p></div>
+        <span class="spec-chevron">↓</span>
+      </div>
+      <div class="specialist-body">
+        <p class="sd-label">What it does</p>
+        <p class="sd-text">Holds every draft to four criteria before it goes out: Is it specific to this client and situation? Is hard information delivered directly, not softened? Is every sentence earning its place? Does it sound like the agent who signed it?</p>
+        <p class="sd-label">What to expect</p>
+        <p class="sd-text">It tells you what passes and what doesn't, and it says why. If something doesn't clear the bar it comes back with what needs adjusting — not a rubber stamp, a real review.</p>
+        <p class="sd-label">Where the criteria come from</p>
+        <p class="sd-text">Diana's Standard — a document in the system files that defines the quality bar for the whole team. If Diana's standards evolve, she updates that file and it flows through automatically.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DEMO MODAL -->
+<div class="modal-backdrop" id="modal-backdrop" onclick="closeModal()"></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="modal-header">
+    <div>
+      <p class="modal-eyebrow">Guided demo</p>
+      <h3 class="modal-title">Watch a request move through the system.</h3>
+    </div>
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+  </div>
+
+  <div class="demo-scenarios">
+    <button class="scenario-btn" onclick="loadScenario('lead', this)">New buyer inquiry</button>
+    <button class="scenario-btn" onclick="loadScenario('showing', this)">Showing prep for tomorrow</button>
+    <button class="scenario-btn" onclick="loadScenario('contract', this)">Deal just went under contract</button>
+    <button class="scenario-btn" onclick="loadScenario('draft', this)">Client follow-up needed</button>
+  </div>
+
+  <div class="demo-output-wrap" id="demo-wrap">
+    <div class="demo-input-pane">
+      <p class="demo-pane-label">Request to Orchestrator</p>
+      <p class="demo-request-text" id="demo-request-display">Select a scenario above.</p>
+    </div>
+    <div class="demo-output-pane">
+      <div class="demo-empty" id="demo-empty">← Select a scenario<br>to see the output</div>
+      <div class="demo-loading" id="demo-loading">Routing<span class="loading-dots"></span></div>
+      <div class="out-section hidden" id="out-route-section">
+        <p class="out-label">Routed to</p>
+        <div class="out-route" id="out-route"></div>
+      </div>
+      <div class="out-section hidden" id="out-assessment-section">
+        <p class="out-label">Assessment</p>
+        <p class="out-text" id="out-assessment"></p>
+      </div>
+      <div class="out-section hidden" id="out-packet-section">
+        <p class="out-label">Handoff Packet</p>
+        <div class="out-packet" id="out-packet"></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="modal-note">In the real system, you'll run this in Claude with the Orchestrator files loaded. This demo shows the shape of what comes back.</p>
+</div>
+
+<!-- SETUP -->
+<section class="section section-navy" id="setup">
+  <p class="eyebrow reveal">Getting set up</p>
+  <h2 class="section-h2 reveal">Three things before your first session.</h2>
+  <p class="section-lead reveal">The setup is under an hour. Most of that is the voice profile — which is worth taking seriously, since it's what keeps your client messages sounding like you and not like the system.</p>
+
+  <div class="steps reveal">
+    <div class="step">
+      <p class="step-num">1</p>
+      <h3 class="step-title">Download the files</h3>
+      <p class="step-body">All the system files live in one place online. Download the whole folder and keep it somewhere you can find — you'll load files from it at the start of each session.</p>
+      <div class="step-note">
+        <strong>Use "Get the files" at the top of this page.</strong>
+        Download the entire folder. Keep everything together — the files reference each other.
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="step-num">2</p>
+      <h3 class="step-title">Set up your voice profile</h3>
+      <p class="step-body">Open the <code style="background:rgba(255,255,255,0.08); color:rgba(241,246,251,0.7); border-radius:2px;">voice/</code> folder. Copy the template file, rename it to your first name, and fill it out. Diana's completed profile is in the same folder — read it first, it makes the template obvious. Takes about 15 minutes.</p>
+      <div class="step-note">
+        <strong>Don't skip this.</strong>
+        The communication specialist won't draft in your name without it, and that's usually the first thing people need.
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="step-num">3</p>
+      <h3 class="step-title">Run your first real request</h3>
+      <p class="step-body">Open Claude. Load the five files listed below — these are your starting files for every Orchestrator session. Drop in something from your actual week. You'll understand the system faster by running a real request than by reading about it.</p>
+      <div class="step-note">
+        <strong>Load these five files to start:</strong>
+        DIANA_STANDARD.md<br>
+        HANDOFF_PROTOCOL.md<br>
+        00_orchestrator/identity.md<br>
+        00_orchestrator/rules.md<br>
+        00_orchestrator/handoff.md
+      </div>
+      <div class="copy-prompt-block">
+        <p class="copy-prompt-label">Nothing to bring from your week yet? Start with this.</p>
+        <p class="copy-prompt-text" id="sample-prompt-text">A new buyer reached out after seeing a listing in South Austin. The Parkers — first home purchase. They mentioned a budget around $650k but seemed uncertain. No timeline given yet, and I'm not sure if they're pre-approved. Marcus spoke with them briefly and they seem motivated.</p>
+        <button class="copy-btn" id="copy-btn" onclick="copyPrompt()">Copy prompt</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIRST SESSION -->
+<section class="section section-navy" id="first-session" style="border-top:1px solid rgba(255,255,255,0.07); padding-top:60px;">
+  <div class="session-layout reveal">
+    <div>
+      <p class="eyebrow">Your first session</p>
+      <h2 class="section-h2" style="margin-bottom:20px;">What happens when you run a request.</h2>
+      <p style="font-size:15px; color:rgba(241,246,251,0.52); line-height:1.8; font-weight:300; margin-bottom:28px;">The Orchestrator produces a Handoff Packet. You copy it into the next specialist's session. That specialist does its work and produces another packet. Follow the chain until the work is done. You don't need to keep anything in your head — the packet carries the context.</p>
+
+      <div class="sb">
+        <p class="sb-label">The basic pattern</p>
+        <p class="sb-text">Request → Orchestrator → Packet → Specialist → Packet → Next specialist → You review and act.</p>
+      </div>
+
+      <div class="sb">
+        <p class="sb-label">Why you copy the packet manually</p>
+        <p class="sb-text">You move the packet from session to session yourself — intentionally. It keeps the system inspectable. You can see exactly what carried forward and catch anything that looks off before the next specialist runs. No hidden state.</p>
+      </div>
+
+      <div class="session-code">
+        Open new Claude session<br>
+        Load root files + specialist files<br>
+        Paste the Handoff Packet<br>
+        Let the specialist run<br>
+        Copy the output → open next session<br>
+        Repeat until done → you review → you send
+      </div>
+    </div>
+
+    <div>
+      <div class="example-box">
+        <p class="example-label">Walkthrough — new lead, start to send</p>
+        <div class="request-quote">"Marcus got an inquiry from the Hendersons. They want South Austin, mentioned $700k but seemed unsure. No timeline, don't know if they're pre-approved."</div>
+        <div class="response-steps">
+          <div class="rs"><span class="rs-num">01</span><p class="rs-text">Orchestrator reads the situation, separates what's confirmed from what's assumed, flags four unknowns, routes to Lead Qualifier with a full packet</p></div>
+          <div class="rs"><span class="rs-num">02</span><p class="rs-text">Lead Qualifier builds a six-field profile with confidence levels on each, recommends a first contact approach for Marcus</p></div>
+          <div class="rs"><span class="rs-num">03</span><p class="rs-text">Communication specialist drafts a message in Marcus's voice — specific to the Hendersons, not a template</p></div>
+          <div class="rs"><span class="rs-num">04</span><p class="rs-text">Quality Review checks it against Diana's Standard — specificity, directness, brevity, voice match — approves or flags what needs adjusting</p></div>
+          <div class="rs"><span class="rs-num">05</span><p class="rs-text">Marcus reads the approved draft, sends it</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SYNC BAND -->
+<div class="sync-band reveal">
+  <div class="sync-pip"></div>
+  <div>
+    <p class="sync-title">When Diana updates the system</p>
+    <p class="sync-body">If Diana changes how the system works — a new quality criterion, an updated checklist, a new voice profile for someone joining the team — she'll let everyone know directly. Download the latest files, replace your current ones, and your next session picks up the change. Nothing else to do.</p>
+  </div>
+</div>
+
+<!-- DIANA -->
+<div class="diana-wrap" id="diana">
+  <div class="diana-header-band">
+    <span class="diana-label">↓ For Diana — setup &amp; administration</span>
+  </div>
+  <div class="diana-section">
+    <h2 class="section-h2 reveal" style="margin-bottom:12px;">Standing it up. Keeping it current.</h2>
+    <p class="section-lead reveal" style="color:var(--text-mid); margin-bottom:40px;">Team members get everything they need above. This section covers initial setup, ongoing maintenance, and the things only you need to know.</p>
+
+    <div class="diana-grid reveal">
+      <div class="diana-card">
+        <h3 class="dc-title">Before the team uses it</h3>
+        <p class="dc-body">The repo ships with your voice profile completed and placeholder agent names throughout the examples. Replace those with your team's actual names and make sure each agent's voice profile is filled out before anyone runs a live session.</p>
+        <p class="dc-note">Start with voice profiles. The communication specialist blocks without them — it's the first wall a new hire hits.</p>
+      </div>
+
+      <div class="diana-card">
+        <h3 class="dc-title">When your standards evolve</h3>
+        <p class="dc-body">The quality bar lives in one file: <code>DIANA_STANDARD.md</code>. When something genuinely changes about how the team should operate, update it there. All six specialists reference it — you don't need to touch anything else.</p>
+        <p class="dc-note">Don't document the standard in more than one place. Two versions means no version.</p>
+      </div>
+
+      <div class="diana-card">
+        <h3 class="dc-title">Adding a new team member</h3>
+        <p class="dc-body">Send them this page first. Then have them run one practice request through the Orchestrator using something real from their first week. Walk through the output together once. After that they're functional.</p>
+        <p class="dc-note">Do the voice profile together, or review their draft before they use it live. It's 15 minutes and it matters.</p>
+      </div>
+
+      <div class="diana-card">
+        <h3 class="dc-title">Escalation</h3>
+        <p class="dc-body">Every specialist has explicit escalation triggers — situations where it flags work for your review rather than producing output alone. High stakes, unusual situations, borderline calls, clients where your relationship matters especially. Common thread: anything where a mistake is hard to recover from.</p>
+        <p class="dc-note">Each specialist's rules file lists its specific escalation triggers for that domain.</p>
+      </div>
+
+      <div class="diana-card">
+        <h3 class="dc-title">The transaction checklist</h3>
+        <p class="dc-body">The checklist in <code>04_transaction_coordinator/rules.md</code> is built for Texas residential. For deals with different requirements, review it before the team uses it on that deal type. The deadline tracking logic carries over — the milestones may not.</p>
+        <p class="dc-note">Worth a quick look before an unusual deal type goes through for the first time.</p>
+      </div>
+
+      <div class="diana-card">
+        <h3 class="dc-title">The full reference</h3>
+        <p class="dc-body">Everything is in the repo — full folder reference, the complete request flow diagrams, and a guide for adapting this system to a different team context if you ever need it. The repo is the documentation. This page is the orientation.</p>
+        <p class="dc-note"><a href="https://github.com/alydperri/agency-system" target="_blank" style="color:var(--navy); text-decoration:none; font-family:var(--mono); font-size:11px;">View the full repo ↗</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-mark">The Agency System · Diana's Team · v1.0</span>
+  <a href="https://github.com/alydperri/agency-system" target="_blank" class="footer-link">github.com/alydperri/agency-system ↗</a>
+</footer>
+
+<script>
+  // ── MODAL ────────────────────────────────────────────────────────────────
+  function openModal() {
+    document.getElementById('modal').classList.add('open');
+    document.getElementById('modal-backdrop').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.getElementById('modal-backdrop').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // ── ORCHESTRATOR SYSTEM PROMPT ──────────────────────────────────────────
+  const ORCH_SYSTEM = `You are the Orchestrator for The Agency System — an AI operating system for Diana's boutique real estate team in Austin, TX.
+
+Your role: Read the request. Assess what is known and unknown. Flag risks. Route to the right specialist with a structured Handoff Packet.
+
+Specialists available:
+- 01_lead_qualifier: New buyer or seller inquiries. Captures intent, budget, timeline, financing, location, constraints.
+- 02_property_research: Research for showings, listings, market questions, pricing analysis.
+- 03_client_communication: Any draft going to a client. Requires knowing which agent's name it goes under.
+- 04_transaction_coordinator: Deals under contract. Tracks deadlines, documents, escalation flags.
+- 05_quality_review: Pre-send review of drafts against Diana's Standard.
+
+Respond in exactly this format:
+
+ROUTED TO: [specialist name]
+
+ASSESSMENT:
+[2-3 sentences. What is this? What's clear? What's missing that matters?]
+
+HANDOFF PACKET:
+known: [what's confirmed]
+unknowns: [critical gaps]
+risk_flags: [timing or situational risks]
+next_output_needed: [what the specialist should produce]
+
+Be direct and specific. No filler.`;
+
+  // ── PRE-BUILT EXAMPLES ───────────────────────────────────────────────────
+  const SCENARIOS = {
+    lead: {
+      request: `A new buyer reached out after seeing a Zillow listing in South Congress. The Hendersons. Marcus spoke with them briefly — they seem motivated but haven't shared budget, timeline, or whether they're pre-approved. First contact.`,
+      route: `01_lead_qualifier`,
+      assessment: `New buyer inquiry at first contact. Marcus has initial rapport but four critical qualification fields are empty: budget, timeline, financing status, and whether they're selling something. The Zillow entry suggests active search. No urgency flags — standard qualification handoff.`,
+      packet: `known:
+  - Buyer inquiry, source: Zillow (South Congress listing)
+  - Names: The Hendersons
+  - Agent: Marcus (initial rapport)
+  - Motivation read: "seems motivated"
+
+unknowns:
+  - Budget / price range
+  - Timeline to purchase
+  - Financing status (pre-approved? cash? selling first?)
+  - Whether they have a current property to sell
+  - What triggered the search right now
+
+risk_flags:
+  - "Motivated but vague" — early browsing vs. active buyer unclear
+  - Unknown if they're working with another agent
+
+next_output_needed:
+  - Six-field lead profile with confidence levels on each field
+  - Recommended first contact approach for Marcus`
+    },
+    showing: {
+      request: `Priya has a showing tomorrow at 2 PM in Bouldin Creek. The Nguyens have seen 12 homes — this might be the one. Listed at $875k. She needs to walk in ready.`,
+      route: `02_property_research`,
+      assessment: `High-stakes showing prep with a tight deadline. The Nguyens are experienced buyers — 12 homes seen means sharp questions and a low tolerance for vague answers. Priya needs a brief she can use in conversation. Price validation against comps is the priority given the $875k ask and buyer sophistication.`,
+      packet: `known:
+  - Property: Bouldin Creek, Austin TX (full address needed)
+  - Listed at: $875,000
+  - Agent: Priya
+  - Buyers: The Nguyens — active, informed (12 homes seen)
+  - Showing: Tomorrow 2 PM
+
+unknowns:
+  - Property specs (sq ft, beds/baths, year built, lot)
+  - Days on market / price history
+  - Specific concerns the Nguyens have raised previously
+  - Priya's read on their price ceiling
+
+risk_flags:
+  - Tight deadline — brief must be ready before the showing
+  - Sophisticated buyers will probe pricing; generic comps won't hold
+  - Bouldin Creek is competitive; $875k may or may not be defensible
+
+next_output_needed:
+  - Comp analysis: 3-block radius, last 90 days, with $/sqft breakdown
+  - Price defensibility assessment vs. subject property
+  - One clear bottom line Priya can use in the room`
+    },
+    contract: {
+      request: `The Garcias just went under contract on a house in Buda. Carmen's deal. Closing June 20th. Option ends May 18th. Inspector went out yesterday, results pending. Conventional financing through Chase. Title with Independence Title.`,
+      route: `04_transaction_coordinator`,
+      assessment: `Active transaction entering its most deadline-dense phase. Option period ends May 18th — a hard stop that determines the Garcias' negotiating position on inspection findings. Results are pending, which means the team may need to move fast. All key parties are identified. Full checklist and timeline need to be live before the option window closes.`,
+      packet: `known:
+  - Buyers: The Garcias
+  - Agent: Carmen
+  - Closing: June 20th
+  - Option period end: May 18th
+  - Inspection: Completed yesterday, results pending
+  - Financing: Conventional, pre-approved through Chase
+  - Title: Independence Title
+
+unknowns:
+  - Inspection results and any flagged items
+  - Seller's posture on repairs or credits
+  - Survey ordered?
+  - HOA documents received (if applicable)?
+  - Appraisal scheduled?
+
+risk_flags:
+  - Option ends May 18th — inspection issues must be resolved before then
+  - Results pending; significant findings compress the timeline fast
+  - June 20th close is tight if financing or appraisal delays arise
+
+next_output_needed:
+  - Full transaction checklist with deadlines and owners
+  - Days-remaining count for all active milestones
+  - Escalation flags for Diana review`
+    },
+    draft: {
+      request: `Need a follow-up email for the Millers after yesterday's showing. They liked the house but went quiet. Diana is the agent. Light check-in, not pushy.`,
+      route: `03_client_communication`,
+      assessment: `Post-showing follow-up where momentum has stalled. Tone calibration is the critical variable — "light check-in, not pushy" means the draft needs to open a conversation without applying pressure. Diana's voice profile must be loaded; this goes out under her name.`,
+      packet: `known:
+  - Client: The Millers
+  - Agent: Diana
+  - Situation: Showed a property yesterday, buyers went quiet after
+  - Tone directive: light check-in, not pushy
+  - Goal: reopen conversation naturally
+
+unknowns:
+  - Diana's specific read on the Millers' hesitation
+  - Whether there's a competing property in consideration
+  - Any objections raised during the showing
+
+risk_flags:
+  - Too much pressure could close off a warm lead
+  - Going too soft could let momentum die entirely
+
+next_output_needed:
+  - Draft follow-up email in Diana's voice
+  - Route to Quality Review before sending
+  - Note: Diana's voice profile must be loaded first`
+    }
+  };
+
+  // ── DEMO UI ──────────────────────────────────────────────────────────────
+  function showOutput(route, assessment, packet) {
+    document.getElementById('demo-empty').style.display = 'none';
+    document.getElementById('demo-loading').classList.remove('active');
+    document.getElementById('out-route').textContent = route;
+    document.getElementById('out-assessment').textContent = assessment;
+    document.getElementById('out-packet').textContent = packet;
+    ['out-route-section','out-assessment-section','out-packet-section'].forEach(id => {
+      document.getElementById(id).classList.remove('hidden');
+    });
+  }
+
+  function showLoading() {
+    document.getElementById('demo-empty').style.display = 'none';
+    ['out-route-section','out-assessment-section','out-packet-section'].forEach(id => {
+      document.getElementById(id).classList.add('hidden');
+    });
+    document.getElementById('demo-loading').classList.add('active');
+  }
+
+  function loadScenario(key, btn) {
+    document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('demo-wrap').classList.add('visible');
+    const s = SCENARIOS[key];
+    document.getElementById('demo-request-display').textContent = s.request;
+    showLoading();
+    setTimeout(() => showOutput(s.route, s.assessment, s.packet), 900);
+  }
+
+  // ── COPY PROMPT ──────────────────────────────────────────────────────────
+  function copyPrompt() {
+    const text = document.getElementById('sample-prompt-text').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copy-btn');
+      btn.textContent = 'Copied';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Copy prompt';
+        btn.classList.remove('copied');
+      }, 2200);
+    });
+  }
+
+  // ── SPECIALIST ACCORDION ─────────────────────────────────────────────────
+  function toggleSpec(el) {
+    const wasOpen = el.classList.contains('open');
+    document.querySelectorAll('.specialist').forEach(s => s.classList.remove('open'));
+    if (!wasOpen) el.classList.add('open');
+  }
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.07, rootMargin: '0px 0px -28px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  const items = document.querySelectorAll('.flow-item');
+  let cur = 0;
+  function cycle() {
+    items.forEach(i => i.classList.remove('lit'));
+    items[cur].classList.add('lit');
+    cur = (cur + 1) % items.length;
+  }
+  cycle();
+  setInterval(cycle, 1800);
+</script>
+
+</body>
+</html>
