@@ -4,6 +4,10 @@
 
 ---
 
+**New to the system?** [Start with the team page →](https://alydperri.github.io/agency-system/)
+
+---
+
 Diana, this was built for you.
 
 Not for a generic real estate team. For a four-person boutique operation that turns down volume to do better work, runs on referrals and reputation, and has too much institutional knowledge living in one person's head.
@@ -56,7 +60,9 @@ Each `handoff.md` uses the root `HANDOFF_PROTOCOL.md` packet shape, then defines
 
 ## Start Here: First Request in 3 Steps
 
-If you are new to the system, start with the team page (`index.html`) before reading further — it gives you the orientation you need to make sense of what's here. Then come back and run one real request.
+New to the system? Start with the [team page →](https://alydperri.github.io/agency-system/) for a guided orientation.
+
+Or go ahead and just run one real request through the Orchestrator:
 
 1. Open `00_orchestrator`.
 
@@ -70,21 +76,15 @@ If you are new to the system, start with the team page (`index.html`) before rea
 
 3. Paste the request and let the Orchestrator route it.
 
-Example first request:
+The Orchestrator will produce a Handoff Packet. Copy that packet into the destination specialist folder it names.
 
-> Marcus has a new buyer lead from the Hendersons. They want to move soon, but we do not know budget, neighborhood, financing status, or decision timeline yet.
-
-The Orchestrator will produce a Handoff Packet. Copy that packet into the destination specialist folder it names — usually `01_lead_qualifier` for a request like this.
-
-The manual copy is intentional. It's what makes the system inspectable: you can see exactly what context traveled forward and catch anything that looks wrong before the next specialist runs. There's no hidden state. The packet is the audit trail.
-
-That is the basic operating pattern:
+The manual copy is intentional. It keeps the system inspectable: you can see exactly what context traveled forward and catch anything that looks wrong before the next specialist runs. There is no hidden state. The packet is the audit trail.
 
 ```text
 Request → Orchestrator → Handoff Packet → Specialist → Next Handoff Packet → Next Specialist
-```
 
 You do not need to memorize the architecture. Follow the packet.
+```
 
 ---
 
@@ -152,6 +152,8 @@ Work doesn't move between specialists without one.
 
 The two contracts are designed to work together: the handoff packet carries the Diana Standard forward at every stage, so quality expectations travel with the work rather than getting re-stated at each step.
 
+The packet shape is intentionally domain-light — this is what makes the system portable if the team ever changes shape.
+
 ---
 
 ## How to Use This System
@@ -194,7 +196,7 @@ Use `examples.md` when a task is unusual or you want to show Claude what good ou
 
 ## Onboarding a New Team Member
 
-Send them the team page first — `index.html` in the repo root, or the GitHub Pages URL if it's enabled. It orients them to the system before they open the files and is a shorter read than this README.
+Send them to the [team page](https://alydperri.github.io/agency-system/) first. It orients them to the system before they open the files and is a shorter read than this README.
 
 Then have them do one thing: run a practice request through the Orchestrator.
 
@@ -214,38 +216,6 @@ A new agent should be functional within a day.
 - It doesn't send anything. Every client-facing output is a draft for agent review.
 - It doesn't replace your judgment. It makes your judgment portable across the team.
 - It doesn't manage multiple transactions in a single session. One request, one client, one thread.
-
----
-
-## Adapting This System for a Different Team
-
-This system was built for Diana's team, but the underlying architecture is not Diana-specific.
-
-The folder structure, handoff protocol, and specialist logic apply to any small, high-trust service team with consistent quality standards and clear workflow stages.
-
-To stand it up for a different team, change four things:
-
-1. **The two root contracts** — update `DIANA_STANDARD.md` with the new team lead's quality bar.
-
-   `HANDOFF_PROTOCOL.md` will usually carry over with minimal changes; the packet shape is intentionally domain-light, though fields like `voice_context_needed` and `quality_review_required` may need renaming for very different service contexts.
-
-   The specialist folders each have a short domain-specific application of the Diana Standard. Review those too, but the root file is the only place the full definition lives.
-
-2. **Agent names and voice profiles** — find and replace agent names throughout `03_client_communication` and any examples.
-
-   Replace the voice profile files in `voice/` with profiles for the new team's agents using `TEMPLATE_voice.md`.
-
-3. **The transaction checklist** — `04_transaction_coordinator/rules.md` contains a checklist built for Texas residential real estate.
-
-   A different jurisdiction, deal type, or industry will have different milestones and documents. Rewrite the checklist. The tracking and flagging logic carries over.
-
-4. **The examples** — scenarios in each `examples.md` are drawn from real estate situations.
-
-   Replace them with two to three representative scenarios from the new domain.
-
-The Orchestrator logic, Handoff Packet structure, and Quality Review pattern transfer with minimal changes.
-
-Those are the architecture. Everything else is content.
 
 ---
 
