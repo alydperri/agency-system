@@ -1,5 +1,7 @@
 # Examples: Orchestrator
 
+*Packets in these examples are condensed for readability. Full field definitions are in `HANDOFF_PROTOCOL.md` and this specialist's `handoff.md`.*
+
 ---
 
 ## Example 1: New Lead Comes In
