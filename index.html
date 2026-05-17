@@ -769,8 +769,8 @@
       </div>
       <div class="specialist-body">
         <p class="sd-label">What it does</p>
-        <p class="sd-text">Turns whatever you know about a new prospect into a structured lead profile. Six fields, each with a confidence level: budget, timeline, location, financing, whether they're selling something, and what's driving the search right now.</p>
-        <p class="sd-label">Why the confidence levels matter</p>
+        <p class="sd-text">Turns whatever you know about a new prospect into a structured lead profile. Six fields: intent, budget, timeline, location, constraints, and source — each with a status and notes.</p>
+        <p class="sd-label">Why the status distinction matters</p>
         <p class="sd-text">There's a difference between what a prospect told you and what you inferred. The profile makes that explicit so you know what's confirmed and what still needs answering before you invest real time.</p>
         <p class="sd-label">What comes out</p>
         <p class="sd-text">A complete lead profile and a recommended next step — usually a first contact draft, which routes to the communication specialist.</p>
@@ -885,7 +885,7 @@
     </div>
   </div>
 
-  <p class="modal-note">This demo shows the core reasoning fields. The full operational packet (including routing, voice, and review metadata) is defined in HANDOFF_PROTOCOL.md.<br><br>In the real system, you'll run this in Claude with the Orchestrator files loaded. This demo shows the shape of what comes back.</p>
+  <p class="modal-note">In the real system, you'll run this in Claude with the Orchestrator files loaded. This demo shows a condensed version of the output — the full Handoff Packet has 15 required fields defined in <code>HANDOFF_PROTOCOL.md</code>.</p>
 </div>
 
 <!-- SETUP -->
@@ -970,7 +970,7 @@
         <div class="request-quote">"Marcus got an inquiry from the Hendersons. They want South Austin, mentioned $700k but seemed unsure. No timeline, don't know if they're pre-approved."</div>
         <div class="response-steps">
           <div class="rs"><span class="rs-num">01</span><p class="rs-text">Orchestrator reads the situation, separates what's confirmed from what's assumed, flags four unknowns, routes to Lead Qualifier with a full packet</p></div>
-          <div class="rs"><span class="rs-num">02</span><p class="rs-text">Lead Qualifier builds a six-field profile with confidence levels on each, recommends a first contact approach for Marcus</p></div>
+          <div class="rs"><span class="rs-num">02</span><p class="rs-text">Lead Qualifier builds a six-field profile — intent, budget, timeline, location, constraints, source — with status on each field and a recommended first contact approach for Marcus</p></div>
           <div class="rs"><span class="rs-num">03</span><p class="rs-text">Communication specialist drafts a message in Marcus's voice — specific to the Hendersons, not a template</p></div>
           <div class="rs"><span class="rs-num">04</span><p class="rs-text">Quality Review checks it against Diana's Standard — specificity, directness, brevity, voice match — approves or flags what needs adjusting</p></div>
           <div class="rs"><span class="rs-num">05</span><p class="rs-text">Marcus reads the approved draft, sends it</p></div>
